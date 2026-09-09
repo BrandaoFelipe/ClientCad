@@ -1,1 +1,82 @@
-<p>consulta works!</p>
+<div class="row">
+    <div class="layout">
+        <form class="mt-60" #consultaForm="ngForm" name="getClient" (ngSubmit)="searchClient()">
+            <mat-card appearance="filled">
+                <mat-card-header>
+                    <mat-card-title> CONSULTA </mat-card-title>
+                </mat-card-header>
+                <mat-card-content class="mt-20">
+
+                    <div class="linha-formulario">
+                        <mat-form-field class="full-width">
+                            <mat-label> Nome: *</mat-label>
+                            <input name="clientName" [(ngModel)]="clientName" placeholder="Ex: Maximillian Swartzmuller"
+                                matInput />
+                        </mat-form-field>
+                    </div>
+                </mat-card-content>
+                <div class="alinhamento-row">
+                    <div class="alinhamento-column">
+                        <mat-card-actions>
+                            <button mat-flat-button color="primary" type="submit">
+                                <mat-icon fontIcon="search"></mat-icon>
+                                Search
+                            </button>
+                        </mat-card-actions>
+                    </div>
+                </div>
+            </mat-card>
+        </form>
+    </div>
+</div>
+
+<div class="row">
+    <div class="layout">
+        <mat-card appearance="outlined" class="mt-20">
+            <mat-card-header>
+                <mat-card-title> RESULTADO </mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <table mat-table [dataSource]="clientList" class="mat-shadow-2">
+
+                    <ng-container matColumnDef="id">
+                        <th mat-header-cell *matHeaderCellDef> No. </th>
+                        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="name">
+                        <th mat-header-cell *matHeaderCellDef> Name </th>
+                        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="email">
+                        <th mat-header-cell *matHeaderCellDef> Email </th>
+                        <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="cpf">
+                        <th mat-header-cell *matHeaderCellDef> Cpf </th>
+                        <td mat-cell *matCellDef="let element"> {{element.cpf}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="dataNascimento">
+                        <th mat-header-cell *matHeaderCellDef> Data nascimento </th>
+                        <td mat-cell *matCellDef="let element"> {{element.dataNascimento}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="edit">
+                        <th mat-header-cell *matHeaderCellDef></th>
+                        <td mat-cell *matCellDef="let element"><button type="button" mat-button
+                                (click)="editClient(element.id)">
+                                <mat-icon fontIcon="edit"></mat-icon>Edit</button> </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+            </mat-card-content>
+        </mat-card>
+
+
+    </div>
+</div>

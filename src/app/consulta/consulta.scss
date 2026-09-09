@@ -1,0 +1,46 @@
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center; /* Equivale ao fxLayoutAlign="center" */
+  width: 100%;
+}
+
+.layout {
+  display: flex;
+  flex-direction: column; /* Equivale ao fxLayout="column" */
+  width: 100%;
+  max-width: 800px;     /* Equivale ao fxFlex="1000px" */
+}
+
+.linha-formulario {
+  display: flex;
+  flex-direction: row;         /* Equivale ao fxLayout="row" */
+  justify-content: flex-start; /* Equivale ao fxLayoutAlign="start" */
+  gap: 16px;                   /* Equivale ao fxLayoutGap="16px" */
+}
+
+.linha-formulario-data-nascimento {
+  display: flex;
+  flex-direction: row;         /* Equivale ao fxLayout="row" */
+  justify-content: flex-start; /* Equivale ao fxLayoutAlign="start" */
+  gap: 16px;
+  max-width: 200px;            /* Equivale ao fxLayoutGap="16px" */
+}
+
+.linha-formulario-cpf {
+  display: flex;
+  flex-direction: row;         /* Equivale ao fxLayout="row" */
+  justify-content: flex-start; /* Equivale ao fxLayoutAlign="start" */
+  gap: 16px;
+  max-width: 400px;            /* Equivale ao fxLayoutGap="16px" */
+}
+.alinhamento-row {
+  flex-direction: row;
+}
+
+alinhamento-column {
+  flex-direction: column;
+}
+table {
+  width: 100%;
+}
