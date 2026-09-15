@@ -28,8 +28,7 @@ export class Consulta implements OnInit {
 
   clientList: Cliente[] = [];
   clientName: string = "";
-
-  displayedColumns: string[] = ['id', 'name', 'email', 'cpf', 'dataNascimento', 'edit'];
+  displayedColumns: string[] = ['id', 'name', 'email', 'cpf', 'dataNascimento', 'acoes'];  
 
   ngOnInit() {
     this.clientList = this.service.findClient('');
@@ -41,6 +40,14 @@ export class Consulta implements OnInit {
 
   editClient(id: string) {
     this.router.navigate(['/cadastro'], { queryParams: { "id": id } });
+  }
+
+  isDeleting(cli: Cliente){
+    cli.deletando = true;
+  }
+
+  deleteClient(id: string) {
+    this.clientList = this.service.deleteClient(id);    
   }
   
 }

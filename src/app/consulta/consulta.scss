@@ -38,9 +38,14 @@
   flex-direction: row;
 }
 
-alinhamento-column {
+.alinhamento-column {
   flex-direction: column;
 }
+
 table {
   width: 100%;
+}
+
+.button-column {
+  flex-direction: row;
 }
