@@ -1,76 +1,103 @@
-<div class="row">
-    <div class="layout">
-        <form class="mt-60" #clientessform="ngForm" (ngSubmit)="salvar()">
-            <mat-card>
-                <mat-card-header>
-                    <mat-card-title> DADOS PESSOAIS </mat-card-title>
-                </mat-card-header>
-                <mat-card-content class="mt-20">
+    <div class="row">
+        <div class="layout">
+            <form class="mt-60" #clientessform="ngForm" (ngSubmit)="salvar()">
+                <mat-card>
+                    <mat-card-header>
+                        <mat-card-title> DADOS PESSOAIS </mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content class="mt-20">
 
-                    <div class="linha-formulario">
-                        <mat-form-field class="full-width">
-                            <mat-label> Nome: *</mat-label>
-                            <input type="text" name="nome" [(ngModel)]="cliente.name"
-                                placeholder="Ex: Maximillian Swartzmuller" matInput />
-                        </mat-form-field>
+                        <div class="linha-formulario">
+                            <mat-form-field class="full-width">
+                                <mat-label> Nome: *</mat-label>
+                                <input type="text" name="nome" [(ngModel)]="cliente.name"
+                                    placeholder="Ex: Maximillian Swartzmuller" matInput />
+                            </mat-form-field>
+                        </div>
+
+                        <div class="linha-formulario">
+                            <mat-form-field class="full-width">
+                                <mat-label> Email: *</mat-label>
+                                <input type="text" name="email" [(ngModel)]="cliente.email" placeholder="Digite seu email"
+                                    mask="A*@A*.SSS" [validation]="true" [dropSpecialCharacters]="false" matInput />
+                            </mat-form-field>
+                        </div>
+
+                        <div class="linha-formulario-cpf">
+                            <mat-form-field class="full-width">
+                                <mat-label> CPF: *</mat-label>
+                                <input type="text" name="cpf" [(ngModel)]="cliente.cpf" placeholder="Digite seu CPF"
+                                    mask="000.000.000-00" matInput />
+                            </mat-form-field>
+                        </div>
+
+                        <div class="linha-formulario-data-nascimento">
+                            <mat-form-field class="full-width">
+                                <mat-label> Data Nascimento: *</mat-label>
+                                <input type="text" name="dataNascimento" [(ngModel)]="cliente.dataNascimento"
+                                    mask="d0/M0/0000" placeholder="Digite sua data de nascimento" matInput />
+                            </mat-form-field>
+                        </div>
+
+                        <div class="linha-formulario-data-nascimento">
+                            <mat-form-field class="full-width">
+                                <mat-label> UF: *</mat-label>
+                                <mat-select name="uf" (selectionChange)="loadCities($event)" [(value)]="cliente.uf">
+                                    @for (element of states; track element.sigla) {
+                                    <mat-option [value]="element.sigla">
+                                        {{element.sigla}}
+                                    </mat-option>
+                                    }
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="linha-formulario-data-nascimento">
+                            <mat-form-field class="full-width">
+                                <mat-label> Município: *</mat-label>
+                                <mat-select name="city" [(value)]="cliente.municipio">
+                                    @for (element of cities; track element.nome) {
+                                    <mat-option [value]="element.nome">
+                                        {{element.nome}}
+                                    </mat-option>
+                                    }
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                    </mat-card-content>
+
+                    <div class="alinhamento-row">
+                        <div class="alinhamento-column">
+                            <mat-card-actions>
+
+                                @if(updating){
+                                <button type="button" mat-flat-button color="primary" class="ml-5"
+                                    [routerLink]="['/consulta']">
+                                    <mat-icon fontIcon="arrow_back"></mat-icon>
+                                    Voltar
+                                </button>
+
+                                <button type="button" mat-flat-button color="primary" class="ml-5" (click)="updateClient()">
+                                    <mat-icon fontIcon="refresh"></mat-icon>
+                                    Atualizar
+                                </button>
+
+                                } @else {
+                                <button type="submit" mat-flat-button color="primary">
+                                    <mat-icon fontIcon="save"></mat-icon>
+                                    Salvar
+                                </button>
+                                }
+
+                                <button type="button" mat-flat-button color="accent" class="ml-5">
+                                    <mat-icon fontIcon="backspace"></mat-icon>
+                                    Limpar
+                                </button>
+                            </mat-card-actions>
+                        </div>
                     </div>
-
-                    <div class="linha-formulario">
-                        <mat-form-field class="full-width">
-                            <mat-label> Email: *</mat-label>
-                            <input type="email" name="email" [(ngModel)]="cliente.email" placeholder="Digite seu email"
-                                matInput />
-                        </mat-form-field>
-                    </div>
-
-                    <div class="linha-formulario-cpf">
-                        <mat-form-field class="full-width">
-                            <mat-label> CPF: *</mat-label>
-                            <input type="text" name="cpf" [(ngModel)]="cliente.cpf" placeholder="Digite seu CPF"
-                                matInput />
-                        </mat-form-field>
-                    </div>
-
-                    <div class="linha-formulario-data-nascimento">
-                        <mat-form-field class="full-width">
-                            <mat-label> Data Nascimento: *</mat-label>
-                            <input type="date" name="dataNascimento" [(ngModel)]="cliente.dataNascimento"
-                                placeholder="Digite sua data de nascimento" matInput />
-                        </mat-form-field>
-                    </div>
-                </mat-card-content>
-
-                <div class="alinhamento-row">
-                    <div class="alinhamento-column">
-                        <mat-card-actions>
-
-                            @if(updating){
-                            <button type="button" mat-flat-button color="primary" class="ml-5"
-                                [routerLink]="['/consulta']">
-                                <mat-icon fontIcon="arrow_back"></mat-icon>
-                                Voltar
-                            </button>
-
-                            <button type="button" mat-flat-button color="primary" class="ml-5" (click)="updateClient()">
-                                <mat-icon fontIcon="refresh"></mat-icon>
-                                Atualizar
-                            </button>
-
-                            } @else {
-                            <button type="submit" mat-flat-button color="primary">
-                                <mat-icon fontIcon="save"></mat-icon>
-                                Salvar
-                            </button>
-                            }
-
-                            <button type="button" mat-flat-button color="accent" class="ml-5" (click)="clearForm()">
-                                <mat-icon fontIcon="backspace"></mat-icon>
-                                Limpar
-                            </button>
-                        </mat-card-actions>
-                    </div>
-                </div>
-            </mat-card>
-        </form>
+                </mat-card>
+            </form>
+        </div>
     </div>
-</div>
